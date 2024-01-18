@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="box" *ngIf="notificationPermission">
+    <div class="title">
+      <h3>推播訊息：</h3>
+      <span *ngIf="notificationPermission !== 'granted'">瀏覽器權限未允許</span>
+      <span
+        *ngIf="notificationPermission === 'granted' && !notificationPermission"
+      >
+        ServiceWorkerPush失效
+      </span>
+    </div>
+
+    <div class="title">
+      <h3>請選擇群組：</h3>
+      <select [(ngModel)]="group">
+        <option value="" disabled>請選擇</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+    </div>
+
+    <div class="content">
+      <textarea
+        [(ngModel)]="content"
+        [disabled]="
+          !notificationPermission ||
+          notificationPermission !== 'granted' ||
+          !group
+        "
+      ></textarea>
+    </div>
+    <div class="actions">
+      <button
+        type="button"
+        (click)="reset()"
+        [disabled]="
+          !notificationPermission ||
+          notificationPermission !== 'granted' ||
+          !group
+        "
+      >
+        重置
+      </button>
+      <button
+        type="button"
+        (click)="send()"
+        [disabled]="
+          !notificationPermission ||
+          notificationPermission !== 'granted' ||
+          !group
+        "
+      >
+        送出
+      </button>
+    </div>
+  </div>
+
+  <div class="log">
+    <h4>後端Response：</h4>
+    <app-push-log [target]="'push'"></app-push-log>
+    <div class="space"></div>
+  </div>
+</div>

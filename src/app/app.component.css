@@ -1,0 +1,15 @@
+.container {
+  flex-direction: column;
+}
+
+.container > * {
+  padding: 0;
+}
+
+.notification {
+  flex: 0 0 200px;
+}
+
+.push {
+  flex: 1 1 auto;
+}

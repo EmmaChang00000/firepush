@@ -1,0 +1,8 @@
+<div class="container">
+  <div *ngFor="let log of logs">
+    <span>{{ log.timestamp | timestamp }}</span>
+    <span>=></span>
+    <span>{{ log.states }}</span>
+    <span *ngIf="log.detail">({{ log.detail }})</span>
+  </div>
+</div>

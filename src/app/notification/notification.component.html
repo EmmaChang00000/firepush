@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="box">
+    <div class="title">
+      <h3>請選擇群組：</h3>
+      <select [(ngModel)]="group">
+        <option value="" disabled>請選擇</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+    </div>
+    <div class="title">
+      <h3>目前權限：</h3>
+      <span>{{ notificationPermission }}</span>
+    </div>
+    <span *ngIf="notificationPermission === 'granted'">=> 感謝訂閱</span>
+    <span *ngIf="notificationPermission === 'denied'">=> 權限被設置為否</span>
+    <button
+      type="button"
+      (click)="requestPermission()"
+      [disabled]="!registration || !group"
+    >
+      瀏覽器權限詢問
+    </button>
+  </div>
+  <div class="log">
+    <h4>Service Worker註冊情況：</h4>
+    <app-push-log [target]="'notification'"></app-push-log>
+    <div class="space"></div>
+  </div>
+</div>

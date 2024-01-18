@@ -1,0 +1,11 @@
+.box {
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+}
+
+.title span {
+  margin: auto 0;
+}

@@ -1,0 +1,26 @@
+.content {
+  flex: 0 1 100%;
+}
+
+.content textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 60px;
+}
+
+.actions > * {
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+}
+
+.title span {
+  margin: auto 0;
+}
