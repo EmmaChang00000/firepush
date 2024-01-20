@@ -43,8 +43,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.apiUrl = LocalUrl;
     }
 
-    this.appService.nextNotificationPermission(Notification.permission);
-
     this.subscription = this.appService
       .isSWRegistrationIn()
       .subscribe((registration) => {
@@ -59,6 +57,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   requestPermission() {
+    if (!this.registration) return;
     // 瀏覽器跳出是否允許通知
     const permission$: Observable<NotificationPermission> = from(
       Notification.requestPermission()
@@ -79,10 +78,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
         if (this.notificationPermission === 'granted') {
           if (this.notificationPermission === 'granted' && this.registration) {
             this.registration.showNotification('感謝您按下允許！');
+          } else {
+            this.appService.nextCheckPush('permissionNot');
           }
           return requestSubscription$;
         } else {
           console.log('notificationPermission denied!!');
+          this.appService.nextCheckPush('permissionNot');
           return of(null);
         }
       })
@@ -94,6 +96,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
         console.log('pushSubscription::', pushSubscription);
         if (pushSubscription) {
           this.registerNotification(pushSubscription);
+        } else {
+          this.appService.nextCheckPush('tokenNot');
         }
       });
   }
@@ -106,7 +110,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
       })
       .pipe(take(1))
       .subscribe((response: IResponse) => {
-        this.appService.nextNotificationPermission(this.notificationPermission);
+        this.appService.nextCheckPush(
+          response.result === 'success' ? response.result : 'apiNot'
+        );
       });
   }
 }

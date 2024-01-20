@@ -1,18 +1,25 @@
 <div class="container">
-  <div class="box" *ngIf="notificationPermission">
+  <div class="box">
     <div class="title">
-      <h3>推播訊息：</h3>
-      <span *ngIf="notificationPermission !== 'granted'">瀏覽器權限未允許</span>
-      <span
-        *ngIf="notificationPermission === 'granted' && !notificationPermission"
-      >
-        ServiceWorkerPush失效
-      </span>
+      <h3>是否能推播訊息：</h3>
+
+      <ng-container *ngIf="checkPush">
+        <ng-container [ngSwitch]="checkPush">
+          <span *ngSwitchCase="'success'">可以了！請選擇群組</span>
+          <span *ngSwitchCase="'permissionNot'">瀏覽器權限未允許</span>
+          <span *ngSwitchCase="'tokenNot'">Token錯誤</span>
+          <span *ngSwitchCase="'apiNot'">Register API錯誤</span>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!checkPush">
+        <span>請先設置權限</span>
+      </ng-container>
     </div>
 
     <div class="title">
       <h3>請選擇群組：</h3>
-      <select [(ngModel)]="group">
+      <select [(ngModel)]="group" [disabled]="!checkPush || checkPush !== 'success'">
         <option value="" disabled>請選擇</option>
         <option value="A">A</option>
         <option value="B">B</option>
@@ -23,33 +30,21 @@
     <div class="content">
       <textarea
         [(ngModel)]="content"
-        [disabled]="
-          !notificationPermission ||
-          notificationPermission !== 'granted' ||
-          !group
-        "
+        [disabled]="!checkPush || checkPush !== 'success' || !group"
       ></textarea>
     </div>
     <div class="actions">
       <button
         type="button"
         (click)="reset()"
-        [disabled]="
-          !notificationPermission ||
-          notificationPermission !== 'granted' ||
-          !group
-        "
+        [disabled]="!checkPush || checkPush !== 'success' || !group"
       >
         重置
       </button>
       <button
         type="button"
         (click)="send()"
-        [disabled]="
-          !notificationPermission ||
-          notificationPermission !== 'granted' ||
-          !group
-        "
+        [disabled]="!checkPush || checkPush !== 'success' || !group"
       >
         送出
       </button>

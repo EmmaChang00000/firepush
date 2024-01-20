@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { IMsg } from './config';
+import { IMsg, TCheckPush } from './config';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { IMsg } from './config';
 export class AppService {
   msgSubject = new BehaviorSubject<IMsg | null>(null);
   swRegistratioubject = new BehaviorSubject<ServiceWorkerRegistration | null>(null);
-  notificationPermissionSubject = new BehaviorSubject<NotificationPermission | null>(null);
+  checkPushSubject = new BehaviorSubject<TCheckPush | null>(null);
 
   nextMsg(msg: IMsg) {
     this.msgSubject.next(msg);
@@ -27,11 +27,11 @@ export class AppService {
     return this.swRegistratioubject.asObservable();
   }
 
-  nextNotificationPermission(notificationPermission: NotificationPermission) {
-    this.notificationPermissionSubject.next(notificationPermission);
+  nextCheckPush(checkPush: TCheckPush) {
+    this.checkPushSubject.next(checkPush);
   }
 
-  isNotificationPermissionIn(): Observable<NotificationPermission | null> {
-    return this.notificationPermissionSubject.asObservable();
+  isCheckPushIn(): Observable<TCheckPush | null> {
+    return this.checkPushSubject.asObservable();
   }
 }

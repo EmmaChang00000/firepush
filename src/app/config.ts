@@ -10,5 +10,8 @@ export interface IMsg {
 
 export interface IResponse {
   result: 'success' | 'fail';
+  detail: string;
   timestamp: number;
 }
+
+export type TCheckPush = 'success' | 'permissionNot' | 'tokenNot' | 'apiNot';
