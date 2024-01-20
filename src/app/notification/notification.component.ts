@@ -13,6 +13,10 @@ import { BaseUrl, IResponse, LocalUrl } from '../config';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * 1.瀏覽器跳出權限視窗
+ * 2.拿service worker產生的認證物件
+ */
 @Component({
   selector: 'app-notification',
   standalone: true,

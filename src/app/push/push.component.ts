@@ -10,6 +10,9 @@ import { BaseUrl, IResponse, LocalUrl } from '../config';
 import { PlatformLocation } from '@angular/common';
 import { Subscription } from 'rxjs/internal/Subscription';
 
+/**
+ * 送推播內容給後端
+ */
 @Component({
   selector: 'app-push',
   standalone: true,

@@ -7,6 +7,9 @@ import { AppService } from './app.service';
 import { from } from 'rxjs/internal/observable/from';
 import { map, take } from 'rxjs/operators';
 
+/**
+ * 確認service worker的狀態
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
