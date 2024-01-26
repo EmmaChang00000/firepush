@@ -76,11 +76,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
           this.notificationPermission = notificationPermission;
         }
         if (this.notificationPermission === 'granted') {
-          if (this.notificationPermission === 'granted' && this.registration) {
-            this.registration.showNotification('感謝您按下允許！');
-          } else {
-            this.appService.nextCheckPush('permissionNot');
-          }
+          this.registration!.showNotification('感謝您按下允許！');
           return requestSubscription$;
         } else {
           console.log('notificationPermission denied!!');
