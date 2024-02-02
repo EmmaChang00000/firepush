@@ -39,9 +39,14 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log(environment.production, this.location.hostname);
     if (!environment.production || this.location.hostname === 'localhost') {
       this.apiUrl = LocalUrl;
     }
+
+    this.swPush.messages.subscribe((message) => {
+      console.log('Message received： ', message);
+    });
 
     this.subscription = this.appService
       .isSWRegistrationIn()

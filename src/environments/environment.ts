@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   publicKey:
-    'BIigeyiQppXH3uGZgkCkS8qdZXjELHIlE9dUxpYzBtQkJyI0TBZPHPZQ9jPar7RM8tOrmCdfXS7aCR60see6bSQ',
+    'BJD7XKX8M2cXsZd7tNwR98X0z5TKGVeHg0J8HLlwRfxSw8dqoifUOm00EbtZYCSJxNIQ89fYYj83Rbpfy7TYvH8',
 };
