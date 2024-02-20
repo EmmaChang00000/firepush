@@ -80,6 +80,14 @@ export class PushComponent implements OnInit, OnDestroy {
       notification: {
         title: '標題ABC',
         body: this.content,
+        data: {
+          onActionClick: {
+            default: {
+              operation: 'openWindow',
+              url: 'https://www.google.com/',
+            },
+          },
+        },
       },
     };
 
