@@ -7,7 +7,14 @@ import { AppService } from './app.service';
 import { from } from 'rxjs/internal/observable/from';
 import { map, take } from 'rxjs/operators';
 
+declare global {
+  interface Navigator {
+    standalone?: boolean;
+  }
+}
+
 /**
+ * 引導pwa的安裝
  * 確認service worker的狀態
  */
 @Component({
@@ -24,6 +31,11 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
+    const isIOS = /(iPhone|iPod|iPad)/i.test(navigator.userAgent);
+    const isStandalone = navigator.standalone;
+    if(isIOS && !isStandalone){
+      alert('建議將此網站加入到主畫面app，\n否則不支援推播');
+    }
     this.checkServiceWorkerController();
   }
 
