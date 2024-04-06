@@ -108,6 +108,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   registerNotification(pushSubscription: PushSubscription) {
+    console.log(992, {
+      pushSubscription: pushSubscription,
+      group: this.group,
+    });
     this.http
       .post<IResponse>(`${this.apiUrl}${BaseUrl}/register`, {
         pushSubscription: pushSubscription,
