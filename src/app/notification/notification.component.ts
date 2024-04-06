@@ -45,7 +45,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     this.swPush.messages.subscribe((message) => {
-      console.log('Message received： ', message);
+      console.log('swPush messages ', message);
+    });
+
+    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
+      console.log('swPush notificationClicks', { action, notification });
     });
 
     this.subscription = this.appService
